@@ -8,8 +8,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static final String COUNT_VALUE = "count_value";
     private int count = 0;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        outState.putInt(COUNT_VALUE,count);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +42,15 @@ public class MainActivity extends AppCompatActivity {
                 tvCount.setText(Integer.toString(++count));
             }
         });
+    }
+
+    TextView tvCount;
+
+    protected void  onRestoreInstante(Bundle saveInstanceState){
+        super.onRestoreInstanceState(saveInstanceState);
+        count= saveInstanceState.getInt(COUNT_VALUE);
+        if (tvCount!=null){
+            tvCount.setText(Integer.toString(count));
+        }
     }
 }
