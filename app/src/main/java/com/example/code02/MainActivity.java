@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String COUNT_VALUE = "count_value";
     private int count = 0;
+    private TextView tvCount;
 
     @Override
     protected void onSaveInstanceState(Bundle outState){
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
-        final TextView tvCount = findViewById(R.id.tvCount);
+        tvCount = findViewById(R.id.tvCount);
         Button btnCount = findViewById(R.id.btnCount);
         btnCount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,9 +45,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    TextView tvCount;
-
-    protected void  onRestoreInstante(Bundle saveInstanceState){
+    @Override
+    protected void  onRestoreInstanceState(Bundle saveInstanceState){
         super.onRestoreInstanceState(saveInstanceState);
         count= saveInstanceState.getInt(COUNT_VALUE);
         if (tvCount!=null){
